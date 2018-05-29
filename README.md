@@ -2,10 +2,10 @@
 Planning and Reminder App
 
 ## Fitur
-*Add divisi baru
-*Sistem Agenda-Objective-Todo
-*Tampilan kalender dan tabel
-*Progress bar
+- *Add divisi baru
+- *Sistem Agenda-Objective-Todo
+- *Tampilan kalender dan tabel
+- *Progress bar
 
 ## Sistem Agenda-Objective-Todo
 ###### Agenda
