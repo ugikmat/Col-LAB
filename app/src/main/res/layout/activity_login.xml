@@ -74,15 +74,41 @@
                 android:text="Login"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/forget_password_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Forgot your Password?"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't Have an account?"/>
+                <TextView
+                    android:id="@+id/text_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register Now!"
+                    android:textColor="@android:color/holo_red_light"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Or Forgot Your Password?"/>
+                <TextView
+                    android:id="@+id/text_forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap Here!"
+                    android:textColor="@android:color/holo_red_light"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
