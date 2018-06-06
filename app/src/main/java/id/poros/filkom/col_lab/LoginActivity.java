@@ -29,6 +29,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,17 +46,15 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    //TODO: Add Firebase
+    private FirebaseAuth mAuth;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private TextView mRegisterText;
+    private TextView mForgotText;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -93,6 +97,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(new Intent(getApplicationContext(),SignUpActivity.class));
             }
         });
+
+        mForgotText = findViewById(R.id.text_forgot_password);
+        mForgotText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"Not Implemented Yet!",Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        //Initiate FirebaseAuth
+        mAuth = FirebaseAuth.getInstance();
     }
 
     private void populateAutoComplete() {
@@ -158,7 +174,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -183,7 +199,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            //TODO: try to auth with firebase authentication
+            mAuth.signInWithEmailAndPassword(mEmailView.getText().toString(),mPasswordView.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this,"Signin Success, Welcome "+mAuth.getCurrentUser().getEmail(),Toast.LENGTH_LONG)
+                                        .show();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            }else{
+                                Toast.makeText(LoginActivity.this,"Failed",Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                            showProgress(false);
+                        }
+                    });
         }
     }
 
