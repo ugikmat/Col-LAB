@@ -14,7 +14,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -35,11 +34,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import id.poros.filkom.col_lab.model.User;
+
 import static android.Manifest.permission.READ_CONTACTS;
+import static id.poros.filkom.col_lab.model.CurrentUser.currentUser;
 
 /**
  * A login screen that offers login via email/password.
@@ -49,6 +56,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
+
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -109,6 +119,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         //Initiate FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference("users");
     }
 
     private void populateAutoComplete() {
@@ -206,7 +218,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             if(task.isSuccessful()){
                                 Toast.makeText(LoginActivity.this,"Signin Success, Welcome "+mAuth.getCurrentUser().getEmail(),Toast.LENGTH_LONG)
                                         .show();
+                                mRef.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        currentUser = dataSnapshot.getValue(User.class);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                LoginActivity.this.finish();
                             }else{
                                 Toast.makeText(LoginActivity.this,"Failed",Toast.LENGTH_SHORT)
                                         .show();
