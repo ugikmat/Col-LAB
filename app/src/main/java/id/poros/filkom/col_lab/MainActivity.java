@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity
     private final String KEY_POSITION = "keyPosition";
 
     //TODO: Replace later
-    private String fragmentTag="PROFILE";
+    private String fragmentTag="ORGANIZATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Col-LAB");
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
@@ -77,27 +78,27 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -108,16 +109,20 @@ public class MainActivity extends AppCompatActivity
         String tag="";
 
         switch (id){
-            case R.id.nav_profile: tag="PROFILE";
+            case R.id.nav_profile:
                 break;
-            default:
+            case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";
+                break;
+            default:getSupportActionBar().setTitle("Other");tag="OTHER";
                 break;
         }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return switchFragment(tag);
+        if (!tag.isEmpty())return switchFragment(tag);
+        else startActivity(new Intent(this,ProfileActivity.class));
+        return false;
     }
 
 
@@ -132,7 +137,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initFragment(Bundle savedInstanceState){
         if (savedInstanceState==null){
-            switchFragment("PROFILE");
+            switchFragment("ORGANIZATION");
         }
     }
 
@@ -182,9 +187,11 @@ public class MainActivity extends AppCompatActivity
     private Fragment createFragment(){
         Fragment fragment;
         switch (fragmentTag){
-            case "PROFILE": fragment = new ProfileFragment();
+//            case "PROFILE": fragment = new ProfileFragment();
+//                break;
+            case "ORGANIZATION": fragment = new OrgFragment();
                 break;
-            default: fragment = new OrgFragment();
+            default: fragment = new ProfileFragment();
         }
         return fragment;
     }
