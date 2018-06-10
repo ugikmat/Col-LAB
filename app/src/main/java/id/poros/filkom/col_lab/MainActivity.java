@@ -3,11 +3,13 @@ package id.poros.filkom.col_lab;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import id.poros.filkom.col_lab.OrgFragment;
 
@@ -25,9 +28,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import id.poros.filkom.col_lab.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, OrgFragment.OnListFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener{
 
     private FirebaseAuth mAuth;
+
+    private final String KEY_POSITION = "keyPosition";
+
+    //TODO: Replace later
+    private String fragmentTag="PROFILE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +63,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        initFragment(savedInstanceState);
     }
 
     @Override
@@ -95,9 +105,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        String tag="";
+
+        switch (id){
+            case R.id.nav_profile: tag="PROFILE";
+                break;
+            default:
+                break;
+        }
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return switchFragment(tag);
     }
 
 
@@ -108,5 +128,74 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this,LoginActivity.class));
             finish();
         }
+    }
+
+    private void initFragment(Bundle savedInstanceState){
+        if (savedInstanceState==null){
+            switchFragment("PROFILE");
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+        fragmentTag = savedInstanceState.getString(KEY_POSITION);
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putString(KEY_POSITION,fragmentTag);
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    private Boolean switchFragment(String tag){
+        fragmentTag = tag;
+        Fragment fragment = findFragment();
+        if (fragment.isAdded()) return false;
+        detachFragment();
+        attachFragment(fragment,tag);
+        getSupportFragmentManager().executePendingTransactions();
+        return true;
+    }
+
+    private void detachFragment(){
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if(fragment!=null)getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+    }
+    private void attachFragment(Fragment fragment, String tag){
+        if(fragment.isDetached()){
+            getSupportFragmentManager().beginTransaction().attach(fragment).commit();
+        }else{
+            getSupportFragmentManager().beginTransaction().add(R.id.container,fragment,tag).commit();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
+    private Fragment findFragment(){
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+        if (fragment==null) fragment = createFragment();
+        return fragment;
+    }
+
+    private Fragment createFragment(){
+        Fragment fragment;
+        switch (fragmentTag){
+            case "PROFILE": fragment = new ProfileFragment();
+                break;
+            default: fragment = new OrgFragment();
+        }
+        return fragment;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
