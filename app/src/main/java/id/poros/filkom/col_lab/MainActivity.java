@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import id.poros.filkom.col_lab.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OrgFragment.OnListFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, OrgFragment.OnListFragmentInteractionListener{
 
     private FirebaseAuth mAuth;
 
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity
 
     //TODO: Replace later
     private String fragmentTag="ORGANIZATION";
+
+    private com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        initNavigationDrawer(toolbar);
+
+        initFragment(savedInstanceState);
+    }
+
+    private void initNavigationDrawer(Toolbar toolbar) {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        initFragment(savedInstanceState);
+        navigationView.setCheckedItem(R.id.nav_agenda);
     }
 
     @Override
@@ -111,7 +119,13 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.nav_profile:
                 break;
-            case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";
+            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fab.setText("New Agenda");
+                break;
+            case R.id.nav_division:getSupportActionBar().setTitle("Division");tag="DIVISION";fab.setText("New Division");
+                break;
+            case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fab.setText("New Event");
+                break;
+            case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";fab.setText("New Organization");
                 break;
             default:getSupportActionBar().setTitle("Other");tag="OTHER";
                 break;
@@ -137,7 +151,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initFragment(Bundle savedInstanceState){
         if (savedInstanceState==null){
-            switchFragment("ORGANIZATION");
+            switchFragment("AGENDA");
         }
     }
 
@@ -187,11 +201,15 @@ public class MainActivity extends AppCompatActivity
     private Fragment createFragment(){
         Fragment fragment;
         switch (fragmentTag){
-//            case "PROFILE": fragment = new ProfileFragment();
-//                break;
+            case "AGENDA": fragment = new AgendaFragment();
+                break;
+            case "DIVISION": fragment = new DivisionFragment();
+                break;
+            case "EVENT": fragment = new EventFragment();
+                break;
             case "ORGANIZATION": fragment = new OrgFragment();
                 break;
-            default: fragment = new ProfileFragment();
+            default: fragment = new Fragment();
         }
         return fragment;
     }
@@ -201,8 +219,4 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
