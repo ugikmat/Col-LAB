@@ -22,13 +22,34 @@
 
     <include layout="@layout/content_main" />
 
-    <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabText="New Agenda"
-        app:fabIcon="@drawable/ic_add_new"/>
+    <com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout
+        android:id="@+id/fab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:fabMenuGravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin">
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabIcon="@drawable/ic_add_new"/>
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabText="New Agenda"
+            app:fabIcon="@drawable/ic_add_new"/>
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabText="Join Agenda"
+            app:fabIcon="@drawable/ic_rowing"/>
+
+    </com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

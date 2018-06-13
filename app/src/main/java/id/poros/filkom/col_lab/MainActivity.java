@@ -1,15 +1,10 @@
 package id.poros.filkom.col_lab;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +12,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import id.poros.filkom.col_lab.OrgFragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout;
 
 import id.poros.filkom.col_lab.dummy.DummyContent;
 
@@ -34,10 +26,11 @@ public class MainActivity extends AppCompatActivity
 
     private final String KEY_POSITION = "keyPosition";
 
-    //TODO: Replace later
     private String fragmentTag="ORGANIZATION";
 
-    private com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton fab;
+    private com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout fab;
+    private com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton fabJoin;
+    private com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +42,19 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabJoin = findViewById(R.id.fab_join);
+        fabAdd = findViewById(R.id.fab_add);
+
+        fab = findViewById(R.id.fab_menu);
+        fab.setOnMenuExpandedListener(new FloatingLayout.OnMenuExpandedListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onMenuExpanded() {
+
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+
             }
         });
 
@@ -113,24 +113,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         String tag="";
 
         switch (id){
             case R.id.nav_profile:
                 break;
-            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fab.setText("New Agenda");
+            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");
                 break;
-            case R.id.nav_division:getSupportActionBar().setTitle("Division");tag="DIVISION";fab.setText("New Division");
+            case R.id.nav_division:getSupportActionBar().setTitle("Division");tag="DIVISION";fabAdd.setText("New Division");fabJoin.setText("Join Division");
                 break;
-            case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fab.setText("New Event");
+            case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fabAdd.setText("New Event");fabJoin.setText("Join Event");
                 break;
-            case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";fab.setText("New Organization");
+            case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";fabAdd.setText("New Organization");fabJoin.setText("Join Organization");
                 break;
             default:getSupportActionBar().setTitle("Other");tag="OTHER";
                 break;
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
