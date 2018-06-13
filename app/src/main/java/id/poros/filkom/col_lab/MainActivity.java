@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";fabAdd.setText("New Organization");fabJoin.setText("Join Organization");
                 break;
-            default:getSupportActionBar().setTitle("Other");tag="OTHER";
+            default:
                 break;
         }
 
