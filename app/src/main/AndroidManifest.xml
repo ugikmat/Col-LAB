@@ -22,7 +22,6 @@
             android:label="Sign Up" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model.FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>

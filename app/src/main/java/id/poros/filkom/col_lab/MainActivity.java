@@ -115,8 +115,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         String tag="";
 
+        Class<?> cls=null;
+
         switch (id){
-            case R.id.nav_profile:
+            case R.id.nav_profile:tag="ACTIVITY"; cls = ProfileActivity.class;
+                break;
+            case R.id.nav_feedback:tag="ACTIVITY"; cls = FeedbackActivity.class;
                 break;
             case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");
                 break;
@@ -130,8 +134,8 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        if (!tag.isEmpty())return switchFragment(tag);
-        else startActivity(new Intent(this,ProfileActivity.class));
+        if (tag.equalsIgnoreCase("ACTIVITY"))startActivity(new Intent(this,cls));
+        else if(!tag.isEmpty()) return switchFragment(tag);
         return false;
     }
 
