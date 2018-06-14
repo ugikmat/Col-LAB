@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_feedback:tag="ACTIVITY"; cls = FeedbackActivity.class;
                 break;
-            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");
+            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");fabJoin.setText("Join Agendagit ");
                 break;
             case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fabAdd.setText("New Event");fabJoin.setText("Join Event");
                 break;
