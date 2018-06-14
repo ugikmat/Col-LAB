@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout;
 
 import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.model.AgendaContent;
+import id.poros.filkom.col_lab.model.EventContent;
 import id.poros.filkom.col_lab.model.OrganizationContent;
 
 public class MainActivity extends AppCompatActivity
@@ -217,6 +219,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(OrganizationContent.OrganizationItem item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(AgendaContent.AgendaItem item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(EventContent.EventItem item) {
 
     }
 }

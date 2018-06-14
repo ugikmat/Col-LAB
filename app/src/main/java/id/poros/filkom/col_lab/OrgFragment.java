@@ -27,7 +27,6 @@ public class OrgFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public static final String TAG = OrgFragment.class.getSimpleName();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
