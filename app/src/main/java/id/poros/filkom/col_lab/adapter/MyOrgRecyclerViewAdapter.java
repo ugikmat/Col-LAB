@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 
 import id.poros.filkom.col_lab.R;
-import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.Interface.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.OrganizationContent.OrganizationItem;
 
 import java.util.List;

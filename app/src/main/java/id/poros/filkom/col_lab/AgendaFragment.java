@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import id.poros.filkom.col_lab.adapter.AgendaRecyclerViewAdapter;
-import id.poros.filkom.col_lab.adapter.MyOrgRecyclerViewAdapter;
-import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.Interface.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.AgendaContent;
-import id.poros.filkom.col_lab.model.OrganizationContent;
 
 
 /**

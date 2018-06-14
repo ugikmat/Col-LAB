@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import id.poros.filkom.col_lab.R;
-import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.Interface.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.AgendaContent.AgendaItem;
 
 public class AgendaRecyclerViewAdapter extends RecyclerView.Adapter<AgendaRecyclerViewAdapter.ViewHolder> {

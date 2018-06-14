@@ -1,4 +1,4 @@
-package id.poros.filkom.col_lab.inter;
+package id.poros.filkom.col_lab.Interface;
 
 import id.poros.filkom.col_lab.model.AgendaContent;
 import id.poros.filkom.col_lab.model.EventContent;
