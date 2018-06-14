@@ -8,17 +8,11 @@ import android.widget.TextView;
 
 
 import id.poros.filkom.col_lab.R;
-import id.poros.filkom.col_lab.dummy.DummyContent.DummyItem;
 import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.OrganizationContent.OrganizationItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecyclerViewAdapter.ViewHolder> {
 
     private final List<OrganizationItem> mValues;
@@ -39,8 +33,7 @@ public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecycler
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).name);
+        holder.mName.setText(mValues.get(position).name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,20 +54,18 @@ public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mName;
         public OrganizationItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mName = view.findViewById(R.id.name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mName.getText() + "'";
         }
     }
 }

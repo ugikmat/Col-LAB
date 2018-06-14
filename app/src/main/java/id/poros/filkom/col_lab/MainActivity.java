@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout;
 
-import id.poros.filkom.col_lab.dummy.DummyContent;
 import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.OrganizationContent;
 

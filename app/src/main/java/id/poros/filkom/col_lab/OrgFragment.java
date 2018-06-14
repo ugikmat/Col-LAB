@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import id.poros.filkom.col_lab.adapter.MyOrgRecyclerViewAdapter;
-import id.poros.filkom.col_lab.dummy.DummyContent;
-import id.poros.filkom.col_lab.dummy.DummyContent.DummyItem;
 import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
 import id.poros.filkom.col_lab.model.OrganizationContent;
 
