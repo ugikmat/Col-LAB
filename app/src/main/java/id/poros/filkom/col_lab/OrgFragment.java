@@ -10,15 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import id.poros.filkom.col_lab.adapter.MyOrgRecyclerViewAdapter;
 import id.poros.filkom.col_lab.dummy.DummyContent;
 import id.poros.filkom.col_lab.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.model.OrganizationContent;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
 public class OrgFragment extends Fragment {
@@ -26,7 +27,7 @@ public class OrgFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    private OnListFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     public static final String TAG = OrgFragment.class.getSimpleName();
 
@@ -57,7 +58,7 @@ public class OrgFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyOrgRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyOrgRecyclerViewAdapter(OrganizationContent.ITEMS, mListener));
         }
 
         return view;
@@ -67,8 +68,8 @@ public class OrgFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -80,21 +81,5 @@ public class OrgFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
-    }
-
 
 }

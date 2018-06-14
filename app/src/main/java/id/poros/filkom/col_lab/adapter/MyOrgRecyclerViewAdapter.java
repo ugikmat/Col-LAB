@@ -1,4 +1,4 @@
-package id.poros.filkom.col_lab;
+package id.poros.filkom.col_lab.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,22 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import id.poros.filkom.col_lab.OrgFragment.OnListFragmentInteractionListener;
+
+import id.poros.filkom.col_lab.R;
 import id.poros.filkom.col_lab.dummy.DummyContent.DummyItem;
+import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.model.OrganizationContent.OrganizationItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<OrganizationItem> mValues;
+    private final OnFragmentInteractionListener mListener;
 
-    public MyOrgRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyOrgRecyclerViewAdapter(List<OrganizationItem> items, OnFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,7 +40,7 @@ public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mContentView.setText(mValues.get(position).name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +63,7 @@ public class MyOrgRecyclerViewAdapter extends RecyclerView.Adapter<MyOrgRecycler
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public OrganizationItem mItem;
 
         public ViewHolder(View view) {
             super(view);

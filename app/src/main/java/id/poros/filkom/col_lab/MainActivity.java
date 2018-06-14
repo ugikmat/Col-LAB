@@ -13,14 +13,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout;
 
 import id.poros.filkom.col_lab.dummy.DummyContent;
+import id.poros.filkom.col_lab.inter.OnFragmentInteractionListener;
+import id.poros.filkom.col_lab.model.OrganizationContent;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OrgFragment.OnListFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener{
 
     private FirebaseAuth mAuth;
 
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         if (tag.equalsIgnoreCase("ACTIVITY"))startActivity(new Intent(this,cls));
         else if(!tag.isEmpty()) return switchFragment(tag);
+        else Toast.makeText(this,"Unimplemented Yet!",Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -213,8 +217,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(OrganizationContent.OrganizationItem item) {
 
     }
-
 }
