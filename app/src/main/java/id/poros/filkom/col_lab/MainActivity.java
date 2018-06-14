@@ -120,8 +120,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");
                 break;
-            case R.id.nav_division:getSupportActionBar().setTitle("Division");tag="DIVISION";fabAdd.setText("New Division");fabJoin.setText("Join Division");
-                break;
             case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fabAdd.setText("New Event");fabJoin.setText("Join Event");
                 break;
             case R.id.nav_organization:getSupportActionBar().setTitle("Organization");tag="ORGANIZATION";fabAdd.setText("New Organization");fabJoin.setText("Join Organization");
@@ -200,8 +198,6 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment;
         switch (fragmentTag){
             case "AGENDA": fragment = new AgendaFragment();
-                break;
-            case "DIVISION": fragment = new DivisionFragment();
                 break;
             case "EVENT": fragment = new EventFragment();
                 break;
