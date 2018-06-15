@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_feedback:tag="ACTIVITY"; cls = FeedbackActivity.class;
                 break;
-            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");fabJoin.setText("Join Agendagit ");
+            case R.id.nav_agenda:getSupportActionBar().setTitle("Agenda");tag="AGENDA";fabAdd.setText("New Agenda");fabJoin.setText("Join Agenda");
                 break;
             case R.id.nav_event:getSupportActionBar().setTitle("Event");tag="EVENT";fabAdd.setText("New Event");fabJoin.setText("Join Event");
                 break;
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         if (tag.equalsIgnoreCase("ACTIVITY"))startActivity(new Intent(this,cls));
         else if(!tag.isEmpty()) return switchFragment(tag);
-        else Toast.makeText(this,"Unimplemented Yet!",Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this,"Not Implemented Yet!",Toast.LENGTH_SHORT).show();
         return false;
     }
 
