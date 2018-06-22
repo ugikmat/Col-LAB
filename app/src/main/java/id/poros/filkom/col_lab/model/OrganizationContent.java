@@ -14,11 +14,13 @@ public class OrganizationContent {
     public static class OrganizationItem {
         public final String id;
         public final String name;
+        public final String short_name;
         public final String details;
 
-        public OrganizationItem(String id, String name, String details) {
+        public OrganizationItem(String id, String name, String short_name, String details) {
             this.id = id;
             this.name = name;
+            this.short_name = short_name;
             this.details = details;
         }
 
@@ -43,7 +45,7 @@ public class OrganizationContent {
     }
 
     private static OrganizationItem createOrganizationItem(int position) {
-        return new OrganizationItem(String.valueOf(position), "Organization " + position, makeDetails(position));
+        return new OrganizationItem(String.valueOf(position), "Organization " + position,"Org" + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
